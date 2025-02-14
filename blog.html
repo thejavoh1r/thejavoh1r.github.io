@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Bosh sahifa</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Aloqa</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>So‘nggi maqolalar</h2>
+        <ul id="blog-list">Yuklanmoqda...</ul>
+    </section>
+
+    <script>
+    fetch("posts.json")
+        .then(response => response.json())
+        .then(posts => {
+            let html = "";
+            posts.forEach(post => {
+                html += `<li><a href="${post.url}">${post.title}</a></li>`;
+            });
+            document.getElementById("blog-list").innerHTML = html;
+        })
+        .catch(error => console.error("Xatolik:", error));
+    </script>
+</body>
+</html>
